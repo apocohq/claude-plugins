@@ -1,0 +1,15 @@
+{
+  "name": "brainio",
+  "description": "Brainio MCP integration for Claude Code — connect to Brainio's AI-powered knowledge and collaboration platform.",
+  "version": "0.0.1",
+  "author": {
+    "name": "Apoco"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "brainio",
+    "knowledge",
+    "collaboration",
+    "mcp"
+  ]
+}
