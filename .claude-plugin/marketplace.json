@@ -15,6 +15,14 @@
       "version": "0.0.1",
       "keywords": ["mqtt", "iot", "pubsub", "channel", "mcp"],
       "category": "channels"
+    },
+    {
+      "name": "brainio",
+      "source": "./plugins/brainio",
+      "description": "Brainio MCP integration — connect to Brainio's AI-powered knowledge and collaboration platform.",
+      "version": "0.0.1",
+      "keywords": ["brainio", "knowledge", "collaboration", "mcp"],
+      "category": "integrations"
     }
   ]
 }

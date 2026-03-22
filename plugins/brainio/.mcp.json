@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "brainio": {
+      "url": "https://brainio.com/api/mcp"
+    }
+  }
+}
