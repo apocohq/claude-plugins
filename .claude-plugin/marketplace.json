@@ -1,0 +1,20 @@
+{
+  "name": "apoco-plugins",
+  "owner": {
+    "name": "Apoco"
+  },
+  "metadata": {
+    "description": "Apoco plugin marketplace for Claude Code",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "mqtt",
+      "source": "./plugins/mqtt",
+      "description": "MQTT channel for Claude Code — pub/sub bridge with topic-based access control.",
+      "version": "0.0.1",
+      "keywords": ["mqtt", "iot", "pubsub", "channel", "mcp"],
+      "category": "channels"
+    }
+  ]
+}
