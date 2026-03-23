@@ -1,0 +1,68 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [{ "type": "command", "command": "python3 ~/.clawdboard/hooks/clawdboard-hook.py", "timeout": 10 }]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [{ "type": "command", "command": "python3 ~/.clawdboard/hooks/clawdboard-hook.py", "timeout": 10 }]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [{ "type": "command", "command": "python3 ~/.clawdboard/hooks/clawdboard-hook.py", "timeout": 10 }]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "*",
+        "hooks": [{ "type": "command", "command": "python3 ~/.clawdboard/hooks/clawdboard-hook.py", "timeout": 10 }]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [{ "type": "command", "command": "python3 ~/.clawdboard/hooks/clawdboard-hook.py", "timeout": 10 }]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "*",
+        "hooks": [{ "type": "command", "command": "python3 ~/.clawdboard/hooks/clawdboard-hook.py", "timeout": 10 }]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "*",
+        "hooks": [{ "type": "command", "command": "python3 ~/.clawdboard/hooks/clawdboard-hook.py", "timeout": 10 }]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "matcher": "*",
+        "hooks": [{ "type": "command", "command": "python3 ~/.clawdboard/hooks/clawdboard-hook.py", "timeout": 10 }]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "*",
+        "hooks": [{ "type": "command", "command": "python3 ~/.clawdboard/hooks/clawdboard-hook.py", "timeout": 10 }]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "idle_prompt",
+        "hooks": [{ "type": "command", "command": "python3 ~/.clawdboard/hooks/clawdboard-hook.py idle_prompt", "timeout": 10 }]
+      },
+      {
+        "matcher": "permission_prompt",
+        "hooks": [{ "type": "command", "command": "python3 ~/.clawdboard/hooks/clawdboard-hook.py permission_prompt", "timeout": 10 }]
+      }
+    ]
+  }
+}
