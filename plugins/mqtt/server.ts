@@ -36,6 +36,19 @@ try {
   }
 } catch {}
 
+// ── Message Buffer ──────────────────────────────────────────────────────
+
+type BufferedMessage = {
+  topic: string
+  payload: string
+  qos: number
+  ts: string
+  retained: boolean
+}
+
+const MAX_BUFFER_SIZE = 1000
+const messageBuffer: BufferedMessage[] = []
+
 const BROKER_URL = process.env.MQTT_BROKER_URL
 const USERNAME = process.env.MQTT_USERNAME
 const PASSWORD = process.env.MQTT_PASSWORD
@@ -194,6 +207,28 @@ mcp.setRequestHandler(ListToolsRequestSchema, async () => ({
         required: ['topic'],
       },
     },
+    {
+      name: 'receive',
+      description:
+        'Returns buffered messages received since last call (or since server start). Only buffers when the client does not support channel notifications.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          topic: {
+            type: 'string',
+            description: 'MQTT topic filter to match (supports + and # wildcards). If omitted, returns all buffered messages.',
+          },
+          limit: {
+            type: 'number',
+            description: 'Maximum number of messages to return. Default: all buffered.',
+          },
+          clear: {
+            type: 'boolean',
+            description: 'Whether to remove returned messages from the buffer. Default: true.',
+          },
+        },
+      },
+    },
   ],
 }))
 
@@ -269,6 +304,42 @@ mcp.setRequestHandler(CallToolRequestSchema, async req => {
 
         return { content: [{ type: 'text', text: `unsubscribed from ${topic}` }] }
       }
+      case 'receive': {
+        const topicFilter = args.topic as string | undefined
+        const limit = args.limit as number | undefined
+        const clear = (args.clear as boolean | undefined) ?? true
+
+        let matched: BufferedMessage[]
+        if (topicFilter) {
+          matched = messageBuffer.filter(m => topicMatchesFilter(m.topic, topicFilter))
+        } else {
+          matched = [...messageBuffer]
+        }
+
+        if (limit !== undefined && limit < matched.length) {
+          matched = matched.slice(0, limit)
+        }
+
+        if (clear) {
+          if (topicFilter || limit !== undefined) {
+            const toRemove = new Set(matched)
+            for (let i = messageBuffer.length - 1; i >= 0; i--) {
+              if (toRemove.has(messageBuffer[i])) messageBuffer.splice(i, 1)
+            }
+          } else {
+            messageBuffer.length = 0
+          }
+        }
+
+        return {
+          content: [{
+            type: 'text',
+            text: matched.length === 0
+              ? 'no messages in buffer'
+              : JSON.stringify(matched),
+          }],
+        }
+      }
       default:
         return {
           content: [{ type: 'text', text: `unknown tool: ${req.params.name}` }],
@@ -315,20 +386,34 @@ client.on('connect', () => {
 })
 
 client.on('message', (topic, payload, packet) => {
-  mcp.notification({
-    method: 'notifications/claude/channel',
-    params: {
-      content: payload.toString('utf8'),
-      meta: {
-        topic,
-        ts: new Date().toISOString(),
-        qos: String(packet.qos),
-        ...(packet.retain ? { retained: 'true' } : {}),
+  const ts = new Date().toISOString()
+  const supportsChannel = !!mcp.getClientCapabilities()?.experimental?.['claude/channel']
+
+  if (supportsChannel) {
+    mcp.notification({
+      method: 'notifications/claude/channel',
+      params: {
+        content: payload.toString('utf8'),
+        meta: {
+          topic,
+          ts,
+          qos: String(packet.qos),
+          ...(packet.retain ? { retained: 'true' } : {}),
+        },
       },
-    },
-  }).catch(err => {
-    process.stderr.write(`mqtt channel: failed to deliver inbound to Claude: ${err}\n`)
-  })
+    }).catch(err => {
+      process.stderr.write(`mqtt channel: failed to deliver inbound to Claude: ${err}\n`)
+    })
+  } else {
+    if (messageBuffer.length >= MAX_BUFFER_SIZE) messageBuffer.shift()
+    messageBuffer.push({
+      topic,
+      payload: payload.toString('utf8'),
+      qos: packet.qos,
+      ts,
+      retained: !!packet.retain,
+    })
+  }
 })
 
 client.on('error', err => {

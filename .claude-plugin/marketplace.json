@@ -12,7 +12,7 @@
       "name": "mqtt",
       "source": "./plugins/mqtt",
       "description": "MQTT channel for Claude Code — pub/sub bridge with topic-based access control.",
-      "version": "0.0.1",
+      "version": "0.0.2",
       "keywords": ["mqtt", "iot", "pubsub", "channel", "mcp"],
       "category": "channels"
     },
