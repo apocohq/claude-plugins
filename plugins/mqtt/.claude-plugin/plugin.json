@@ -1,7 +1,6 @@
 {
   "name": "mqtt",
   "description": "MQTT channel for Claude Code \u2014 pub/sub bridge with topic-based access control. Manage subscriptions, allowlists, and QoS via /mqtt:access.",
-  "version": "0.0.2",
   "author": {
     "name": "Apoco"
   },
