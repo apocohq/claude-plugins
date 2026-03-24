@@ -6,6 +6,7 @@ A [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugin-market
 
 | Plugin | Description |
 | --- | --- |
+| [clawdboard](./plugins/clawdboard/) | Clawdboard setup — install the macOS menu bar app that monitors Claude Code sessions, configure hooks, and set up IDE integration. |
 | [mqtt](./plugins/mqtt/) | MQTT channel for Claude Code — pub/sub bridge with topic-based access control. |
 
 ## Install

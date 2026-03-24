@@ -7,6 +7,7 @@ This is a Claude Code plugin marketplace named `apoco-plugins`.
 ```
 .claude-plugin/marketplace.json   # Marketplace catalog — lists all plugins and their sources
 plugins/                          # Each subdirectory is a plugin
+  clawdboard/                     # Clawdboard setup plugin (commands, hooks)
   mqtt/                           # MQTT channel plugin (MCP server, TypeScript/Bun)
 ```
 
@@ -15,6 +16,8 @@ plugins/                          # Each subdirectory is a plugin
 - **Marketplace file**: `.claude-plugin/marketplace.json` defines the marketplace name, owner, and plugin entries. Each plugin entry has a `name`, `source` (relative path to the plugin dir), and metadata.
 - **Plugin manifest**: Each plugin has `.claude-plugin/plugin.json` with its own name, description, version, and keywords.
 - **Skills**: Markdown files under `plugins/<name>/skills/<skill>/SKILL.md` that define slash commands.
+- **Commands**: Markdown files under `plugins/<name>/commands/<command>.md` that define user-invocable slash commands.
+- **Hooks**: JSON files under `plugins/<name>/hooks/hooks.json` that register event-driven hooks.
 - **MCP servers**: Configured in `.mcp.json` within each plugin directory.
 
 ## Conventions
