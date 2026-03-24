@@ -1,7 +1,6 @@
 {
   "name": "clawdboard",
   "description": "Clawdboard setup — install the macOS menu bar app that monitors Claude Code sessions, configure hooks, and set up IDE integration (iTerm2 and/or VS Code).",
-  "version": "0.0.1",
   "author": {
     "name": "Apoco"
   },
