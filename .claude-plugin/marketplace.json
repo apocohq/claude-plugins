@@ -5,6 +5,7 @@
   },
   "metadata": {
     "description": "Apoco plugin marketplace for Claude Code",
+    "version": "0.0.2",
     "pluginRoot": "./plugins"
   },
   "plugins": [
