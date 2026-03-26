@@ -29,4 +29,5 @@ plugins/                          # Each subdirectory is a plugin
 
 ## Validation
 
-Run `claude plugin validate .` from the repo root to check marketplace and plugin manifests.
+- Run `claude plugin validate .` from the repo root to check marketplace and plugin manifests.
+- When creating, scaffolding, or modifying plugin structure (adding/removing components, changing manifests, reorganizing files), always use the `/plugin-structure` skill to verify the changes follow correct plugin architecture conventions.
