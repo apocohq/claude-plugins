@@ -1,6 +1,6 @@
 ---
 name: install
-description: Install Clawdboard via Homebrew and optionally set up IDE integration.
+description: Install Clawdboard via Homebrew (or build from source) and optionally set up IDE integration.
 ---
 
 # /clawdboard:install
@@ -18,18 +18,38 @@ Minimize approval prompts. Use the Read and Write tools for file operations. Onl
 
 ## Step 1 — Install Clawdboard
 
-Run a single Bash command to check if brew and the app are available:
+Check if the app is already installed:
 
 ```bash
-echo "brew:$(which brew 2>/dev/null)" && echo "app:$(ls -d /Applications/Clawdboard.app ~/Applications/Clawdboard.app 2>/dev/null | head -1)"
+echo "app:$(ls -d /Applications/Clawdboard.app ~/Applications/Clawdboard.app 2>/dev/null | head -1)"
 ```
 
-If the app is not installed:
+If the app is already installed, tell the user and ask if they want to upgrade/reinstall. If they decline, skip to Step 2.
+
+If the app is not installed (or the user wants to upgrade), detect the install method:
+
+```bash
+echo "source_repo:$(grep -q 'name: "Clawdboard"' ./Package.swift 2>/dev/null && echo yes || echo no)" && echo "brew:$(which brew 2>/dev/null)" && echo "mise:$(which mise 2>/dev/null)"
+```
+
+### Source repo detected
+
+If `source_repo` is `yes`, ask the user whether they want to **build from source** or **install via Homebrew**.
+
+**Build from source:**
+
+1. If `mise` is available, run: `mise run setup`
+2. Run: `./scripts/bundle.sh`
+3. Open the built app.
+
+Then skip the Homebrew path below.
+
+### Homebrew (default)
+
+If not in the source repo, or the user chose Homebrew:
 
 1. If `brew` is not available, tell the user to install Homebrew from https://brew.sh and stop.
 2. Run: `brew install --cask apocohq/clawdboard/clawdboard && open /Applications/Clawdboard.app`
-
-If already installed, tell the user and move on.
 
 ## Step 2 — IDE integration (optional)
 

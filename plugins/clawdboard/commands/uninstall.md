@@ -17,9 +17,19 @@ Minimize approval prompts. Use the Read and Write tools for file operations. Onl
 
 ## Step 1 — Uninstall Clawdboard
 
-Run: `osascript -e 'quit app "Clawdboard"' 2>/dev/null; brew uninstall --cask clawdboard`
+Check how Clawdboard was installed:
 
-This removes the app and the `~/.clawdboard/` directory.
+```bash
+echo "brew_cask:$(brew list --cask 2>/dev/null | grep -q clawdboard && echo yes || echo no)"
+```
+
+Quit the app first: `osascript -e 'quit app "Clawdboard"' 2>/dev/null`
+
+If `brew_cask` is `yes`, run: `brew uninstall --cask clawdboard`
+
+Otherwise, remove the app directly: `rm -rf /Applications/Clawdboard.app ~/Applications/Clawdboard.app`
+
+Then remove the configuration directory: `rm -rf ~/.clawdboard/`
 
 ## Step 2 — IDE cleanup (optional)
 

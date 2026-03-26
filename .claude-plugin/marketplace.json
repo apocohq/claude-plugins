@@ -21,7 +21,7 @@
       "name": "clawdboard",
       "source": "./plugins/clawdboard",
       "description": "Clawdboard setup — install the macOS menu bar app and configure Claude Code hooks and IDE integration.",
-      "version": "0.0.1",
+      "version": "0.0.2",
       "keywords": ["clawdboard", "menu-bar", "monitoring", "hooks", "setup"],
       "category": "tools"
     }
