@@ -38,7 +38,7 @@ If `source_repo` is `yes`, ask the user whether they want to **build from source
 
 **Build from source:**
 
-1. If `mise` is available, run: `mise run setup`
+1. If `mise` is available, run: `mise trust && mise run setup`
 2. Run: `./scripts/bundle.sh`
 3. Open the built app.
 
