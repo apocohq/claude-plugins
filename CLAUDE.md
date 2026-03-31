@@ -9,6 +9,7 @@ This is a Claude Code plugin marketplace named `apoco-plugins`.
 plugins/                          # Each subdirectory is a plugin
   clawdboard/                     # Clawdboard setup plugin (commands, hooks)
   mqtt/                           # MQTT channel plugin (MCP server, TypeScript/Bun)
+  practical-skills/               # Productivity skills (external: apocohq/skills)
 ```
 
 ## Key concepts
