@@ -24,6 +24,16 @@
       "version": "0.0.2",
       "keywords": ["clawdboard", "menu-bar", "monitoring", "hooks", "setup"],
       "category": "tools"
+    },
+    {
+      "name": "practical-skills",
+      "source": {
+        "source": "github",
+        "repo": "apocohq/skills"
+      },
+      "description": "Practical skills that teach AI agents to get things done — Gmail organization, morning triage, meeting minutes, code review, design planning, and more.",
+      "keywords": ["gmail", "things3", "productivity", "code-review", "meetings", "design", "prd"],
+      "category": "skills"
     }
   ]
 }
